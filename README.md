@@ -15,7 +15,8 @@ I have listed them here.
 ## 6 Cursors
 ## 7 Other Relative Queries
 
-Following are the queries we have implemented.
+Following are the queries we have implemented.  
+
 **1. WHERE Clause**
 MySQL WHERE Clause is used with SELECT, INSERT, UPDATE and DELETE clause to filter the results. It specifies a specific position where you have to do the operation.
 
