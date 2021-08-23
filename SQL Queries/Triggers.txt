@@ -1,0 +1,65 @@
+# create three tables
+
+create table patientsdischarged (
+	patientid int,
+    name varchar(3),
+    DOB date,
+    gender varchar(6),
+    address varchar(100),
+    phone int,
+    disease varchar(25),
+    bloodgroup varchar(3),
+    doctorid int,
+    
+    foreign key (doctorid) references doctors(doctorid)
+);
+
+
+create trigger pat_trig before delete on patients for each row
+	insert into patientsdischarged 
+    
+	select patientid as ID, concat(Firstname, Lastname) as 'Name',
+    DOB, Gender, Address, Phone, Disease, Bloodgroup, doctorid
+	from patients 
+	inner join patientinfo using (patientid);
+
+
+----------------------------------------------------------------------------------------------------------------
+
+create table employeesquit (
+	empid int,
+    name varchar(25),
+    department varchar(25),
+    gender varchar(6),
+    age int,
+    phone int,
+    joineddate date,
+    quitdate date
+);
+
+
+create trigger emp_trig before delete on employees for each row
+
+	insert into employeesquit
+	select *, date_format(now(), '%Y-%m-%d') as 'Quit Date' 
+    from employeedata;
+
+----------------------------------------------------------------------------------------------------------------
+
+create table doctorsquit (
+	docid int,
+    name varchar(25),
+    department varchar(25),
+    gender varchar(6),
+    age int,
+    phone int,
+    joineddate date,
+    quitdate date
+);
+
+
+create trigger doc_trig before delete on doctors for each row
+
+	insert into doctorsquit
+	select *, date_format(now(), '%Y-%m-%d') as 'Quit Date'
+        from doctordata;

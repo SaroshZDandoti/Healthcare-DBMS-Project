@@ -1,0 +1,52 @@
+# First Procedure
+# Find all the patients who dont have diabetis, asthama, heart problems and hiv
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `NON_CRITICAL_PATIENTS`()
+BEGIN
+	select distinct unhealthypatients.patientid, name from patientinfo
+    join unhealthypatients 
+    on IS_DIABETIC=0 and
+	IS_ASTHAMATIC=0 and
+    HAS_HEARTPROBLEMS=0 and 
+	HAS_HIV=0
+    order by unhealthypatients.patientid;
+END
+
+
+# Second Procedure
+# Find all the patients who have atleast 3 of diabetis, asthama, heart problems or hiv
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CRITICAL_PATIENTS`()
+BEGIN
+	select distinct unhealthypatients.patientid, name from patientinfo
+    join unhealthypatients 
+    on IS_DIABETIC + IS_ASTHAMATIC + HAS_HEARTPROBLEMS + HAS_HIV >= 3
+    order by unhealthypatients.patientid;
+END
+
+
+# Third Procedure
+# Find the experience of a given doctor
+CREATE DEFINER=`root`@`localhost` PROCEDURE `DOCTOR_EXPERIENCE`(in docid int)
+BEGIN
+	declare years int;
+    declare months int;
+	declare days int;
+    
+    select datediff(curdate(), joined_0n) into days
+    from doctor_info where doctorid = docid;
+    
+    if days >= 30 then
+		set months = days / 30;
+	end if;
+    
+	if months >= 12 then
+		set years = months / 12;
+        set months = months mod 12;
+    end if;
+    
+	select docid as 'ID', doctorname as 'Name', concat(years, ' Years ', months, ' Months') as 'Experience in Days'
+    from doctors
+    where doctors.doctorid=docid;
+    
+END

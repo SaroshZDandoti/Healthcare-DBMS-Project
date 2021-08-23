@@ -1,0 +1,48 @@
+# First Function
+# Find total cost in bill for a given patient
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `HOSPITALITY_COST`(pid int) RETURNS int
+    DETERMINISTIC
+BEGIN
+	declare bin int;
+    declare doccharge int;
+    declare roomcharge int;
+    
+	select bill_no into bin from patientinfo where patientid=pid;
+    
+    select doctor_charge, room_charge into doccharge, roomcharge from bill where bill_no=bin;
+    
+    
+	RETURN (doccharge + roomcharge);
+END
+
+
+
+
+# Second Function
+# Find the number of patients being treated by given doctor
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `DOCTOR_TREATING_PATIENTS`(docid int) RETURNS int
+    DETERMINISTIC
+BEGIN
+	declare cnt int;
+    select count(distinct patientid) into cnt from patientinfo where doctorid = docid;
+	RETURN cnt;
+END
+
+
+
+# Third Function
+# Find the number of all patients admitted into hospital
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `TOTAL_ADMITTED_PATIENTS`() RETURNS int
+    DETERMINISTIC
+BEGIN
+	declare active int;
+    declare discharged int;
+    
+	select count(*) into active from  patients;
+    select count(*) into discharged from patientsdischarged;
+    
+	RETURN (active + discharged);
+END

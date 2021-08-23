@@ -1,0 +1,61 @@
+
+# 1 Show the information on patients
+ 
+select * from patientinfo;
+
+# 2 Display the number of patients using a each medicine 
+select count(PatientID) , meds
+from medicines group by MEDS;
+
+# 3 Show the Ratings given by number of Patients
+
+select count(FromPatientID) , HOSPITAL_RATING
+from feedback group by HOSPITAL_RATING;
+
+# 4  Show names of employees who are above age X 
+
+select EMP_NAME from employees
+ join employee_info epi using (EMPID)  
+  where  epi.AGE > 40;
+  
+  # 5 Show avg age of patients
+  
+  select round(avg( datediff(curdate(),DOB) /365 ) , 1) as Average_Age from patients;
+
+# 6 What is the room no. and room type of a certain patient with name , also try with room name
+
+select concat(firstname , lastname )  , room_no , room_type from patients 
+join patientinfo using (patientid) 
+join room using (room_no)
+ where room_type = "Private Room" ;
+ 
+ 
+ # 7 Find MEdical history of a patient
+ 
+ select concat(firstname , lastname ) , is_DIABETIC , has_HEARTPROBLEMS , is_ASTHAMATIC, has_HIV
+ from patients 
+ join  medical_history using (patientID);
+ 
+ 
+ # 8 DELETE a patient fomr DB
+ 
+ delete from 
+ patients where patientid = 3;
+ 
+ # 9 Display the total bill of a Patients  show patient ID , name , billno , charge
+ 
+ select patientid , concat(firstname , lastname ) , bill_no  , sum(DOCTOR_CHARGE + ROOM_CHARGE ) from patients
+      join patientinfo using (patientid)
+      join bill using (bill_no)
+      where patientid = 4;
+
+ # 10 Specfiy what date was the operation of a patient and who was their nurse , display name of patient , date , nurse
+ 
+  select patientid , concat(firstname , lastname ) , oper_id  , DATE , NURSE from patients
+      join patientinfo using (patientid)
+      join operationroom using (oper_id);
+  
+ 
+
+
+

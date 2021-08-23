@@ -1,0 +1,39 @@
+# Views
+
+create view patientdata as 
+select patientid as ID, Firstname, Lastname, DOB, Gender, Address, Phone, Disease, Bloodgroup, Meds as 'Medicines Used', doctorname as "Doctor treating this patient" 
+from patients 
+inner join patientinfo using (patientid)
+inner join doctors using (doctorid)
+inner join medicines using (patientid)
+;
+
+
+create view employeedata as 
+select empid as ID, emp_name as Name, emp_dept as "Department", Gender, Age, Phonenumber, JOINED_0N
+from employees
+inner join employee_info using (empid);
+
+
+create view doctordata as
+select doctorid as ID, doctorname as 'Name', dept as 'Department' , Gender, Age, Phonenumber, JOINED_0N
+from doctors
+join doctor_info using (doctorid);
+
+
+create view occupiedrooms as
+select Room_no as 'Room No', room_type as 'Room Type', concat(firstname, lastname) as 'Occupied by patient' from room
+inner join patientinfo using (room_no)
+inner join patients using (patientid)
+;
+
+
+
+create view unoccupiedrooms as 
+select * from room where status='unoccupied';
+
+
+create view unhealthypatients as 
+select Patientid, concat(firstname, lastname) as 'Name', is_DIABETIC, is_ASTHAMATIC, has_HEARTPROBLEMS, has_HIV  from patients
+join medical_history using (patientid)
+;

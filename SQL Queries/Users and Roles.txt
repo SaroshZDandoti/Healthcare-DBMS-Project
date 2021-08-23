@@ -1,0 +1,11 @@
+CREATE USER 'jeffrey'@'localhost' IDENTIFIED BY '2444666666';
+CREATE USER 'kelly'@'localhost' IDENTIFIED BY 'pA55vv0rd';
+
+create role 'sysadmin', 'doctor', 'staff';
+
+grant all on healthcare.* to 'sysadmin';
+
+grant select on healthcare.* to 'doctor';
+grant insert, update on healthcare.patients to 'doctor';
+
+grant insert, delete on healthcare.* to 'staff';
