@@ -8,10 +8,30 @@ This project includes implementation of most SQL concepts.
 I have listed them here.
 
 ## 1 Functions
+`HOSPITALITY_COST()` finds total cost in bill for a given patient
+
+`DOCTOR_TREATING_PATIENTS` finds the number of patients being treated by given doctor
+
+`TOTAL_ADMITTED_PATIENTS` finds the number of all patients admitted into hospital
+
+`is_room_ava` find whether the room available? returns 1 if yes returns 0 if no
 ## 2 Procedures
+`NON_CRITICAL_PATIENTS()` procedure finds all the patients who dont have diabetis, asthama, heart problems and hiv
+
+`CRITICAL_PATIENTS()` procedure finds all the patients who have atleast 3 of diabetis, asthama, heart problems or hiv
+
+`DOCTOR_EXPERIENCE()` procedure finds the experience of a given doctor
 ## 3 Triggers
+`pat_trig` trigger which makes archive of patients discharged
+
+`emp_trig` trigger which makes archive of ex-employees
+
+`doc_trig` trigger which makes archive of ex-doctors 
 ## 4 Views
 ## 5 Users and Roles
+The roles are `sysadmin`, `doctor` and `staff`
+
+The users are jeffery and kelly
 ## 6 Cursors
 ## 7 Other Relative Queries
 
