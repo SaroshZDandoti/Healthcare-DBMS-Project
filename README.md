@@ -2,6 +2,8 @@
 This is a database management project our team did on a healthcare hospital system to manage many data points and create a stable and optimized Database System.
 This project consists of 16 tables.
 
+![DBMS CIE 3 (1)](https://user-images.githubusercontent.com/75985765/147092770-d5669056-0843-44a8-b37f-804b82052aa0.png)
+
 Here, we have implemented all the possible SQL queries that one must know while working with SQL data-base particularly while fetching and cleaning the data
 
 This project includes implementation of most SQL concepts.
